@@ -11,10 +11,10 @@ public class WordScramblerTest {
 		ExecutorService executor = Executors.newFixedThreadPool(4);
 		Collector collector = new Collector(5);
 		
-		String corrId1 = UUID.randomUUID().toString();
-		String corrId2 = UUID.randomUUID().toString();
-		String corrId3 = UUID.randomUUID().toString();
-		String corrId4 = UUID.randomUUID().toString();
+		String topic1 = UUID.randomUUID().toString();
+		String topic2 = UUID.randomUUID().toString();
+		String topic3 = UUID.randomUUID().toString();
+		String topic4 = UUID.randomUUID().toString();
 //		String corrId5 = UUID.randomUUID().toString();
 //		String corrId6 = UUID.randomUUID().toString();
 //		String corrId7 = UUID.randomUUID().toString();
@@ -23,14 +23,14 @@ public class WordScramblerTest {
 //		String corrId10 = UUID.randomUUID().toString();
 
 		
-		Scrambler producer1 = new Scrambler(collector, "You know you’re in love when you can’t fall asleep because reality is finally better than your dreams", 50, corrId1);
-		Unscrambler consumer1 = new Unscrambler(collector, 100, corrId1);
-		Scrambler producer2 = new Scrambler(collector, "I’m selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can’t handle me at my worst, then you sure as hell don’t deserve me at my best.", 50, corrId2);
-		Unscrambler consumer2 = new Unscrambler(collector, 100, corrId2);
-		Scrambler producer3 = new Scrambler(collector, "The first step toward success is taken when you refuse to be a captive of the environment in which you first find yourself.", 50, corrId3);
-		Unscrambler consumer3 = new Unscrambler(collector, 100, corrId3);
-		Scrambler producer4 = new Scrambler(collector, "When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us.", 50, corrId4);
-		Unscrambler consumer4 = new Unscrambler(collector, 100, corrId4);
+		Scrambler producer1 = new Scrambler(collector, "You know you’re in love when you can’t fall asleep because reality is finally better than your dreams", 50, topic1);
+		Unscrambler consumer1 = new Unscrambler(collector, 100, topic1);
+		Scrambler producer2 = new Scrambler(collector, "I’m selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can’t handle me at my worst, then you sure as hell don’t deserve me at my best.", 50, topic2);
+		Unscrambler consumer2 = new Unscrambler(collector, 100, topic2);
+		Scrambler producer3 = new Scrambler(collector, "The first step toward success is taken when you refuse to be a captive of the environment in which you first find yourself.", 50, topic3);
+		Unscrambler consumer3 = new Unscrambler(collector, 100, topic3);
+		Scrambler producer4 = new Scrambler(collector, "When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us.", 50, topic4);
+		Unscrambler consumer4 = new Unscrambler(collector, 100, topic4);
 //		
 //		Producer producer5 = new Producer(collector, "Twenty years from now you will be more disappointed by the things that you didn’t do than by the ones you did do.", 50, corrId5);
 //		Consumer consumer5 = new Consumer(collector, 100, corrId5);

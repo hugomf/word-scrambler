@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertThat;
 
-public class UnScramblerTest {
+public class UnScrambleHelperTest {
 	
 	private String topic = "MSG";
 	

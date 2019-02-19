@@ -8,7 +8,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class ScramblerTest {
+public class ScrambleHelperTest {
 
 	private String topic = "MSG";
 
