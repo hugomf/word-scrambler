@@ -1,32 +1,23 @@
 package com.tacit.audition.wordscrambler.m2;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Queue;
 
 class Collector {
 
-	private Map<String, Queue<Block>> map;
+	private Queue<Block> queue;
 	
 	private int size;
 
 	public Collector(int size) {
-
 		this.size = size;
-		this.map = new LinkedHashMap<String, Queue<Block>>();
-		
+		this.queue = new LinkedList<Block>();
 	}
 
-	public void add(Block block, String topic) throws InterruptedException {
+	public void add(Block block) throws InterruptedException {
 		synchronized (this) {
-
-			Queue<Block> queue = this.map.get(topic);
-			if (queue==null) {
-				queue = new LinkedList<Block>();
-				map.put(topic, queue);
-			}
 			if (queue.size() >= this.size) {
+				System.out.println(String.format("Thread: %s - Collector is full, waiting...", Thread.currentThread().getId()));
 				wait();
 			}
  			queue.add(block);
@@ -34,21 +25,16 @@ class Collector {
 		}
 	}
 
-	public Block take(String topic) throws InterruptedException {
+	public Block take() throws InterruptedException {
 		synchronized (this) {
-			
-			
-			while(!this.map.containsKey(topic) || this.map.get(topic).size() == 0) {
+			while(this.queue.size() == 0) {
 				wait();
 			}
-			
-			Block block = this.map.get(topic).poll();
+			Block block = this.queue.poll();
 			notify();
 			return block;			
-			
 		}
 	}
-	
 	
 	
 }

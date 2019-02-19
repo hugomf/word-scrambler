@@ -1,20 +1,19 @@
-package com.tacit.audition.wordscrambler.m2;
+package com.tacit.audition.wordscrambler.m3;
 
 import java.util.List;
 
-public class Producer implements Runnable {
+public class Scrambler implements Runnable {
 	
 	private static final String ETX = new String(new char[] {3}); // ASCII Code that represents 'End of Text' ETX
 
-	
 	private Collector collector;
-	private String word;
+	private String phrase;
 	private int time;
 	private String topic;
 
-	public Producer(Collector collector, String word, int time, String topic) {
+	public Scrambler(Collector collector, String phrase, int time, String topic) {
 		this.collector = collector;
-		this.word = word;
+		this.phrase = phrase;
 		this.time = time;
 		this.topic = topic;
 	}
@@ -22,10 +21,10 @@ public class Producer implements Runnable {
 	@Override
 	public void run() {
 		try {
-			List<Block> blocks = Scrambler.scramble(word, this.topic);
+			List<Block> blocks = ScrambleHelper.scramble(phrase, this.topic);
 			blocks.add(new Block(blocks.size(), ETX, this.topic));
 			for (Block block : blocks) {
-				System.out.println(String.format("Thread:%s - Produced Block:%s",Thread.currentThread().getId(), block));
+				System.out.println(String.format("Thread: %s - Produced Block: %s",Thread.currentThread().getId(), block));
 				this.collector.add(block, this.topic);
 				Thread.sleep(this.time);
 			}

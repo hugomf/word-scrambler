@@ -1,13 +1,13 @@
 package com.tacit.audition.wordscrambler.m1;
 
-public class Producer implements Runnable {
+public class Scrambler implements Runnable {
 	
 	private static final String ETX = new String(new char[] {3}); // ASCII Code that represents 'End of Text' ETX
 	private Collector collector;
 	private String phrase;
 	private int time;
 
-	public Producer(Collector collector, String phrase, int time) {
+	public Scrambler(Collector collector, String phrase, int time) {
 		this.collector = collector;
 		this.phrase = phrase;
 		this.time = time;
@@ -18,10 +18,9 @@ public class Producer implements Runnable {
 		try {
 			this.phrase = String.format("%s %s", this.phrase, ETX);
 			String[] words = phrase.split(" ");
-			for (int i = 0; i < words.length; i++) {
-				Block block = new Block(i,words[i]);
-				collector.add(block);
-				System.out.println(String.format("Thread:%s - Produced Block:%s",Thread.currentThread().getId(), block.getWord()));
+			for (String word : words) {
+				collector.add(word);
+				System.out.println(String.format("Thread: %s - Produced word: %s", Thread.currentThread().getId(), word));
 				Thread.sleep(this.time);
 			}
 		} catch (InterruptedException e) {

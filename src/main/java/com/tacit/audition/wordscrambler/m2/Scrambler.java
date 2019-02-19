@@ -1,48 +1,34 @@
 package com.tacit.audition.wordscrambler.m2;
-import java.util.Collections;
-import java.util.Comparator;
+
+
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Lists;
-
-public class Scrambler {
-
-	public static List<Block> scramble(String phrase, String topic) {
+public class Scrambler implements Runnable {
 	
-		List<Block> scrambledBlocks = Lists.newArrayList();
-		if (StringUtils.isEmpty(phrase)) return scrambledBlocks;
-		
-		
-		String[] words = phrase.split(" ");
-		for (int i = 0; i < words.length; i++) {
-			scrambledBlocks.add(new Block(i,words[i], topic));
-		}
-		Collections.shuffle(scrambledBlocks);
-		
-		return scrambledBlocks;
-		
+	private static final String ETX = new String(new char[] {3}); // ASCII Code that represents 'End of Text' ETX
+	private Collector collector;
+	private String phrase;
+	private int time;
+
+	public Scrambler(Collector collector, String phrase, int time) {
+		this.collector = collector;
+		this.phrase = phrase;
+		this.time = time;
 	}
-	
-	public static String unScramble(List<Block> blocks, String corrId) {
-		
-		Collections.sort(blocks, new Comparator<Block>() {
-			@Override
-			public int compare(Block o1, Block o2) {
-				return o1.getPosition() - o2.getPosition();
+
+	@Override
+	public void run() {
+		try {
+			List<Block> blocks = ScrambleHelper.scramble(phrase);
+			blocks.add(new Block(blocks.size(), ETX));
+			for(Block block : blocks) {
+				System.out.println(String.format("Thread: %s - Produced Block: %s",Thread.currentThread().getId(), block.getWord()));
+				collector.add(block);
+				Thread.sleep(this.time);
 			}
-
-		});
-		
-		StringBuilder unScrambled = new StringBuilder();
-		for (Block block : blocks) {
-			unScrambled.append(block.getWord());
-			unScrambled.append(" ");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		
-		return unScrambled.toString().trim();
-		
 	}
-
+	
 }

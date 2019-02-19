@@ -9,9 +9,11 @@ public class WordScramblerTest {
 
 		ExecutorService executor = Executors.newFixedThreadPool(2);
 		Collector collector = new Collector(5);
-		
-		Producer producer1 = new Producer(collector, "You know you’re in love when you can’t fall asleep because reality is finally better than your dreams", 50);
-		Consumer consumer1 = new Consumer(collector, 100);
+
+		Scrambler producer1 = new Scrambler(collector,
+				"You know you’re in love when you can’t fall asleep because reality is finally better than your dreams",
+				50);
+		Unscrambler consumer1 = new Unscrambler(collector, 100);
 		
 		executor.execute(producer1);
 		executor.execute(consumer1);
