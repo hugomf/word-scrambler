@@ -4,13 +4,10 @@ public class Block {
 
 	private int position;
 	private String word;
-	private String topic;
 	
-	public Block(int position, String word, String topic) {
-		
+	public Block(int position, String word) {
 		this.position = position;
 		this.word = word;
-		this.topic = topic;
 	}
 	
 	public int getPosition() {
@@ -29,17 +26,9 @@ public class Block {
 		this.word = word;
 	}
 	
-	public String getTopic() {
-		return topic;
-	}
-
-	public void setTopic(String topic) {
-		this.topic = topic;
-	}
-
 	@Override
 	public String toString() {
-		return String.format("{%s, %s,'%s'}", topic, position, word);
+		return String.format("{%s,'%s'}", position, word);
 	}
 	
 }

@@ -5,18 +5,18 @@ import java.util.Queue;
 
 class Collector {
 
-	private Queue<Block> queue;
-	
+	private Queue<String> queue;
 	private int size;
 
 	public Collector(int size) {
 		this.size = size;
-		this.queue = new LinkedList<Block>();
+		this.queue = new LinkedList<String>();
 	}
 
-	public void add(Block block) throws InterruptedException {
+	public void add(String block) throws InterruptedException {
 		synchronized (this) {
 			if (queue.size() >= this.size) {
+				System.out.println(String.format("Thread:%s - Collector is full, waiting...", Thread.currentThread().getId()));
 				wait();
 			}
  			queue.add(block);
@@ -24,16 +24,15 @@ class Collector {
 		}
 	}
 
-	public Block take() throws InterruptedException {
+	public String take() throws InterruptedException {
 		synchronized (this) {
 			while(this.queue.size() == 0) {
 				wait();
 			}
-			Block block = this.queue.poll();
+			String block = this.queue.poll();
 			notify();
 			return block;			
 		}
 	}
-	
-	
+
 }
