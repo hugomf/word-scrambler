@@ -13,7 +13,7 @@ public class WordScramblerTest {
 		Scrambler producer1 = new Scrambler(collector,
 				"You know you’re in love when you can’t fall asleep because reality is finally better than your dreams",
 				50);
-		Unscrambler consumer1 = new Unscrambler(collector, 100);
+		UnScrambler consumer1 = new UnScrambler(collector, 100);
 		
 		executor.execute(producer1);
 		executor.execute(consumer1);

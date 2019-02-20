@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class Unscrambler implements Runnable {
+public class UnScrambler implements Runnable {
 	
 	
 	private static final java.lang.String ETX = new java.lang.String(new char[] {3}); // initialize to ASCII Code that represents 'End of Text' ETX
@@ -15,7 +15,7 @@ public class Unscrambler implements Runnable {
 	private List<String> blocks;
 	private int time;
 
-	public Unscrambler(Collector collector, int time) {
+	public UnScrambler(Collector collector, int time) {
 		this.collector = collector;
 		this.blocks = Lists.newArrayList();
 		this.time = time;
