@@ -3,7 +3,7 @@ package com.tacit.audition.wordscrambler.m1;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class Collector {
+public class Collector {
 
 	private Queue<String> queue;
 	private int size;
