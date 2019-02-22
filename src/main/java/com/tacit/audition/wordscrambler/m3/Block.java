@@ -27,7 +27,7 @@ public class Block {
 	public void setWord(String word) {
 		this.word = word;
 	}
-	
+
 	public String getTopic() {
 		return topic;
 	}
