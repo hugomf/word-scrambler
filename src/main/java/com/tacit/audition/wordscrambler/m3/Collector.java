@@ -41,5 +41,12 @@ class Collector {
 			return block;
 		}
 	}
+
+	protected int size(String topic) {
+		if (this.map.containsKey(topic)) {
+			return map.get(topic).size();
+		}
+		return 0;
+	}
 	
 }
